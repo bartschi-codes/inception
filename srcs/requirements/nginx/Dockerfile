@@ -1,4 +1,4 @@
-#install Debian
+#install alpine
 
 FROM alpine:edge
 
@@ -8,7 +8,7 @@ RUN 	apk update && \
 	nginx \
 	openssl
 
-Run	mkdir -p /etc/ssl/private && \
+RUN	mkdir -p /etc/ssl/private && \
 	mkdir -p /etc/ssl/certs 
 
 RUN	openssl req \

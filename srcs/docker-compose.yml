@@ -1,0 +1,7 @@
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx/.
+    ports: 
+      - "433:433"
+    restart: always
