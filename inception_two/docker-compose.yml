@@ -1,0 +1,41 @@
+services:
+
+  # nginx
+  nginx:
+    container_name: nginx
+    build:     
+      context: ./requirements/nginx/.
+      dockerfile: nginx.Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./requirements/wordpress:/var/www/php
+    depends_on:
+      - wordpress
+    restart: always
+
+  # wordpress
+  wordpress:
+    container_name: wordpress
+    build: 
+      context: ./requirements/wordpress/.
+      dockerfile: wordpress.Dockerfile
+    working_dir: /var/www/php
+    volumes:
+      - ./requirements/wordpress/website:/var/www/php
+    depends_on:
+      - mariadb
+    restart: always
+
+  # mariadb
+  mariadb:
+    container_name: mariadb
+    build:
+      context: ./requirements/mariadb/.
+      dockerfile: mariadb.Dockerfile
+    environment:
+      MYSQL_DATABASE: wp
+      MYSQL_USER: wp
+      MYSQUL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    restart: always

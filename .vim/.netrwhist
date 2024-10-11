@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/home/mo/inception_two/requirements/nginx/conf'
+let g:netrw_dirhist_7='/home/mo/inception_two/requirements/nginx'
+let g:netrw_dirhist_6='/home/mo/inception_two/requirements/wordpress/conf'
+let g:netrw_dirhist_5='/home/mo/inception_two/requirements/wordpress'
+let g:netrw_dirhist_4='/home/mo/inception_two/requirements'
+let g:netrw_dirhist_3='/home/mo/inception_two/requirements/wordpress'
+let g:netrw_dirhist_2='/home/mo/inception_two/requirements/nginx/conf'
+let g:netrw_dirhist_1='/home/mo/inception_two/requirements/nginx'

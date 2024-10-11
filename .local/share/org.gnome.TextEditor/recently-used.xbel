@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbel version="1.0"
+      xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks"
+      xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info"
+>
+  <bookmark href="file:///home/mo/inception/srcs/requirements/nginx/dockerfile" added="2024-10-10T13:03:51.162389Z" modified="2024-10-11T16:47:18.651388Z" visited="2024-10-11T18:47:15.443572+02">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <bookmark:applications>
+          <bookmark:application name="gnome-text-editor" exec="&apos;gnome-text-editor %u&apos;" modified="2024-10-11T16:47:18.651388Z" count="6"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/mo/inception_two/docker-compose.yml" added="2024-10-11T16:39:43.661700Z" modified="2024-10-11T16:47:18.651387Z" visited="2024-10-11T18:47:15.443336+02">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <bookmark:applications>
+          <bookmark:application name="gnome-text-editor" exec="&apos;gnome-text-editor %u&apos;" modified="2024-10-11T16:47:18.651386Z" count="4"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/mo/inception_two/requirements/nginx/conf/nginx.conf" added="2024-10-11T16:39:49.647733Z" modified="2024-10-11T16:47:18.651390Z" visited="2024-10-11T18:47:15.444860+02">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <bookmark:applications>
+          <bookmark:application name="gnome-text-editor" exec="&apos;gnome-text-editor %u&apos;" modified="2024-10-11T16:47:18.651389Z" count="3"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+</xbel>
