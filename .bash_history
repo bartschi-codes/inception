@@ -582,3 +582,66 @@ wq
 cd ../inception/srcs/requirements/nginx/
 ls
 vim dockerfile 
+cd ../
+docker compose up
+vim nginx/conf/nginx.conf 
+clear
+cat ../../inception/srcs/requirements/nginx/dockerfile 
+clear
+docker compose build
+clear
+docker compose build
+clera
+clear
+docker compose up -s
+docker compose up -d
+docker compose build
+clear
+docker compose up 
+clear
+docker compose build
+clear
+docker compose up
+clear
+docker compose build
+clear
+docker compose up
+clear
+docker compose rebuild
+docker compose ls
+docker compose lsi
+docker compose build
+clear
+docker compose up
+docker compose upclear
+ckear
+clear
+docker compose up
+clear
+docker compose build
+clear
+docker compose up
+clear
+docker compose build
+clear
+docker compose up
+docker compose build
+clear
+docker compose up
+clear
+docker compose build
+clear
+docker compose op
+docker compose up
+clear
+docker compose build
+clear
+docker compose up
+docker compose build
+docker compose up
+clear
+cd
+mv inception/.git/ .
+git add .
+git commit -m "restart, fixing network issue als three dockerfiles done"
+git push
