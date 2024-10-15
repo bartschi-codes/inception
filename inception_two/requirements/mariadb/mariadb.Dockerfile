@@ -6,14 +6,15 @@ RUN <<EOF
 apk update \
 && apk add --no-cache \
 mariadb mariadb-client mariadb-server-utils; \
-mkdir -p /var/lib/mysql \
-&& chown -R mysql:mysql /var/lib/mysql \
-&& chmod 777 /var/lib/mysqld; \
-mariadb-install-db --user=mysql
+mkdir -p /var/lib/mysql /var/run/mysqld \
+&& chown -R mysql:mysql /var/lib/mysql /var/run/mysqld/ \
+&& chmod 775 /var/lib/mysql /var/run/mysqld \
 EOF
 
 COPY	./conf/my.cnf /etc/mysql/
 
+COPY	--chmod=755 ./conf/entrypoint.sh /usr/local/bin
+
 EXPOSE	3306
 
-ENTRYPOINT	["mariadbd-safe"]
+CMD	["/usr/local/bin/entrypoint.sh"]

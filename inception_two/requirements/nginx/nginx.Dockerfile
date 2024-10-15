@@ -5,8 +5,8 @@ FROM alpine:edge
 #Install NGINX 
 RUN	<<EOF 
 apk update \
-&& apk add --no-cache nginx openssl; \
-mkdir /etc/nginx/ssl;
+&& apk add -y --no-cache nginx openssl; \
+mkdir -p /etc/nginx/ssl /run/nginx;
 openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:4096 \
 -keyout /etc/nginx/ssl/nginx.key \
 -out	/etc/nginx/ssl/nginx.cert \
@@ -15,8 +15,6 @@ EOF
 
 COPY	./conf/nginx-custom.conf /etc/nginx/conf.d
 
-RUN	mkdir -p /run/nginx
-
-EXPOSE	443
+EXPOSE	443:443
 
 CMD	["nginx", "-g", "daemon off;"]

@@ -8,9 +8,9 @@ services:
      context: ./requirements/nginx/.
      dockerfile: nginx.Dockerfile
     ports:
-      - '443:443'
+      - "443:443"
     expose:
-      - '443'
+      - 443
     volumes:
       - wp_data:/var/www/html
     depends_on:
@@ -55,8 +55,16 @@ services:
 volumes:
     md_data:
       driver: local
+      driver_opts:
+        type: none
+        device: /home/mo/data/md_data
+        o: bind
     wp_data:
       driver: local
+      driver_opts:
+        type: none
+        device: /home/mo/data/wp_data
+        o: bind
 
 networks: 
     inception:
