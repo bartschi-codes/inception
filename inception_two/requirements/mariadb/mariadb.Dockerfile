@@ -3,17 +3,16 @@
 FROM alpine:edge
 
 RUN <<EOF
-apk update \
-&& apk add --no-cache \
-mariadb mariadb-client mariadb-server-utils; \
-mkdir -p /var/lib/mysql /var/run/mysqld \
-&& chown -R mysql:mysql /var/lib/mysql /var/run/mysqld/ \
-&& chmod 775 /var/lib/mysql /var/run/mysqld \
+apk update; \
+apk add --no-cache mariadb mariadb-server-utils mariadb-client; \
+mkdir -p /var/lib/mysql /run/mysqld; \
+chown -R mysql:mysql /var/lib/mysql /run/mysqld; \
+chmod 0775 /var/lib/mysql /run/mysqld \
 EOF
 
-COPY	./conf/my.cnf /etc/mysql/
+COPY	./conf/my.cnf /etc/my.cnf
 
-COPY	--chmod=755 ./conf/entrypoint.sh /usr/local/bin
+COPY	--chmod=755 ./tools/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 EXPOSE	3306
 
