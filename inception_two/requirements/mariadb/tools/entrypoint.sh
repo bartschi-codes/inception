@@ -1,10 +1,15 @@
 #!/bin/sh
 
-if [ ! -d "/var/lib/mysql/mysql" ]; 
+# Check if mariadb is already installed
+if [ -d "/var/lib/mysql/mysql" ]; 
 then
-	mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+    # Upgrade mariadb
+    mariadb-upgrade --user=mysql
 else
-	mariadb upgrade
+    # Install mariadb
+    mariadb-install-db --user=mysql --datadir=/var/lib/mysql --init-file="/usr/local/bin/init.sql"
 fi
 
-exec mariadbd --user=mysql 
+exec "$@"
+
+
