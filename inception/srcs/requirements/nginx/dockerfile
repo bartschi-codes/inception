@@ -2,26 +2,23 @@
 
 FROM alpine:edge
 
-#Install NGINX 
+#Install NGINX and create folder with permissions for ssl
 RUN	<<EOF 
-apk update && \
-apk add \
-nginx \
-openssl;
-mkdir -p /etc/nginx/ssl;
-openssl req \
--x509 \
--sha256 \
--nodes \
--days 365 \
--newkey rsa:4096 \
--keyout /etc/nginx/ssl/nginx.key \
--out /etc/nginx/ssl/nginx.crt \
--subj "/C=DE/ST=Berlin/L=Berlin/O=42/CN=localhost"
+apk update;
+apk add --no-cache nginx gettext-envsubst openssl;
+mkdir -p /etc/nginx/ssl /run/nginx /etc/nginx/conf.d;
+chmod -R 744 /etc/nginx/ssl /run/nginx
 EOF
 
-COPY conf/nginx.conf /etc/nginx/conf.d/nginx.conf
+# copy config and entrypointscript
+COPY conf/nginx.temp /etc/nginx/nginx.temp
 
-EXPOSE	443
+COPY --chmod=744 tools/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-CMD	["nginx", "-g", "daemon off;"]
+# expose port connecting
+EXPOSE	443:443
+
+# set entrypoint and start command
+ENTRYPOINT	[ "usr/local/bin/entrypoint.sh" ]
+
+CMD	[ "nginx", "-g", "daemon off;" ]

@@ -1,0 +1,20 @@
+
+	server{
+		#set listening ports 433 for https
+		listen 433 ssl;
+		listen [::]:433 ssl;
+	
+		#set ssl cert and key aswell as requiered protocol
+		ssl_certificate 	$SSL_CERT;
+		ssl_certificate_key	$SSL_KEY;
+		ssl_protocols	TLSv1.2 TLSv1.3;
+	
+		#set root of nginx -> wordpress
+		root $WORDPRESS_PATH;
+		server_name $DOMAIN_NAME;
+	
+		#set where nginx finds sites like /wordpress
+		location / {
+		try_files $uri $uri/ =404;
+		}
+ 	}
