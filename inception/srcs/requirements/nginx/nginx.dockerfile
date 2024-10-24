@@ -12,13 +12,13 @@ EOF
 
 # copy config and entrypointscript
 COPY conf/nginx.temp /etc/nginx/nginx.temp
-
-COPY --chmod=744 tools/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY index.html	/var/www/html/index.html
+COPY --chmod=744 tools/entrypoint.sh /usr/local/bin/nx_entrypoint.sh
 
 # expose port connecting
-EXPOSE	443:443
+EXPOSE	443
 
 # set entrypoint and start command
-ENTRYPOINT	[ "usr/local/bin/entrypoint.sh" ]
+ENTRYPOINT	[ "usr/local/bin/nx_entrypoint.sh" ]
 
 CMD	[ "nginx", "-g", "daemon off;" ]

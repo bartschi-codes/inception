@@ -1,7 +1,71 @@
+
 services:
+
   nginx:
     container_name: nginx
-    build: ./requirements/nginx/.
-    ports: 
-      - "433:433"
+    build: 
+      context: requirements/nginx
+      dockerfile: nginx.dockerfile
+    env_file: .env
+    ports:
+      - 443:443
+    volumes:
+      - wordpress:/var/www/html
+    depends_on:
+      - wordpress
+    networks:
+      - inception
     restart: always
+
+  wordpress:
+      container_name: wordpress
+      build: 
+        context: requirements/wordpress
+        dockerfile: wordpress.dockerfile
+      env_file: .env
+      ports:
+        - 9000:9000
+      volumes:
+        - wordpress:/var/www/html
+      networks:
+        - inception
+      restart: always
+
+  mariadb:
+    container_name: mariadb
+    build:
+      context: requirements/mariadb
+      dockerfile: mariadb.dockerfile
+    env_file:
+      - .env
+    ports:
+      - 3306:3306
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - inception
+    restart: always
+
+
+
+volumes:
+
+  wordpress:
+    name: wordpress
+    driver: local 
+    driver_opts: 
+      type:   none
+      device: /home/mo/data/wordpress
+      o:  bind
+
+  mariadb:
+    name: mariadb
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/mo/data/mariadb
+      o: bind
+
+networks:
+  inception:
+    name: inception

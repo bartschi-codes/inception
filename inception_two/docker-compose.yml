@@ -6,7 +6,7 @@ services:
      context: ./requirements/nginx/.
      dockerfile: nginx.Dockerfile
     ports:
-      - "80:80"
+      - "433:433"
     volumes:
       - wp_data:/var/www/html
     depends_on:
