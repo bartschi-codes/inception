@@ -19,6 +19,6 @@ COPY --chmod=744 tools/entrypoint.sh /usr/local/bin/nx_entrypoint.sh
 EXPOSE	443
 
 # set entrypoint and start command
-ENTRYPOINT	[ "usr/local/bin/nx_entrypoint.sh" ]
+ENTRYPOINT [ "/usr/local/bin/nx_entrypoint.sh" ]
 
 CMD	[ "nginx", "-g", "daemon off;" ]
