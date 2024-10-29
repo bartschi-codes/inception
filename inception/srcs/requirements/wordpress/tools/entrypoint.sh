@@ -2,13 +2,13 @@
 
 # substitute env variable in conf file
 envsubst "$(printf '${%s} ' $(env | sed 's/=.*//'))" \
-	< /etc/php83/php-fpm.temp > /etc/php83/php-fpm.d/php-fpm.conf
+	< /etc/php83/php-fpm.temp > /etc/php83/php-fpm.d/www.conf
 
 #move to working directory
 cd /var/www/html
 
 #wait for mariadb
-while ! mariadb -h mariadb -u wpuser -p"wpuser123" -e"SHOW DATABASES;";
+while ! mariadb -u"$WORDPRESS_USER"  -p"$WORDPRESS_PASSWORD" &> /dev/null;
 do
 	sleep 3
 done
@@ -29,12 +29,6 @@ then
 	--title=$WORDPRESS_TITLE --admin_user=$WORDPRESS_USER \
 	--admin_password=$WORDPRESS_PASSWORD --admin_email=$WORDPRESS_MAIL \
 	--skip-email --allow-root
-else
-        wp config create \
-	--dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER \
-	--dbpass=$MYSQL_PASSWORD --dbhost=$MYSQL_HOST \
-	--path=/$WORDPRESS_PATH --skip-check --allow-root
-
 fi
 
 # execute start command

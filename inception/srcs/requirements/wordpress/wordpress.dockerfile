@@ -10,8 +10,9 @@ php-gd php-xml php-mbstring php-zip php-dom php-opcache php-phar php-tokenizer \
 php-exif php-fileinfo gettext-envsubst mariadb-client curl tar; 
 adduser -S www-data -G www-data;
 mkdir -p /var/www /var/www/html;
-chown -R www-data:www-data /var/www;
-chmod -R 755 /var/www;
+chown -R www-data:www-data /var/www/html;
+chmod -R 755 /var/www/html;
+>/var/www/php-error.log
 EOF
 
 # copy php config file and startup script
