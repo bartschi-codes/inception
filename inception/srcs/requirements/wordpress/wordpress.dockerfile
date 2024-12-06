@@ -1,5 +1,5 @@
 # install alpine
-FROM	alpine:edge
+FROM	alpine:3.21.0
 
 #install php, mariadb and utilities
 RUN	<<EOF

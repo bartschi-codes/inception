@@ -100,6 +100,7 @@ http {
 	# Includes virtual hosts configs.
 	include /etc/nginx/http.d/*.conf;
 
+	#wordpress server
 	server{
 		#set listening ports 433 for https
 		listen 443 ssl;
@@ -115,6 +116,31 @@ http {
 		ssl_protocols	TLSv1.2 TLSv1.3;
     		ssl_ciphers HIGH:!aNULL:!MD5;	
 
+		#set where the static is located
+		location /static/ {
+			proxy_pass http://static:3000;
+		        proxy_set_header Host $host;
+		        proxy_set_header X-Real-IP $remote_addr;
+		        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		}
+
+		#set where nginx finds adminer
+		location /adminer/ {
+			proxy_pass 		http://adminer:8080;
+			proxy_set_header	Host $host;
+			proxy_set_header        X-Real-IP $remote_addr;
+			proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+		}
+
+		#set where nginx finds prometheus
+		location /prometheus/ {
+			proxy_pass 		http://prometheus:9090;
+			proxy_set_header	Host $host;
+			proxy_set_header        X-Real-IP $remote_addr;
+			proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+		        proxy_set_header X-Forwarded-Proto $scheme;
+		}
+
 	
 		#set where nginx finds sites like /wordpress
        		 location ~ \.php$ {
@@ -125,6 +151,81 @@ http {
 			fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 			fastcgi_param PATH_INFO $fastcgi_path_info;
        		 }
+	}
+
+	#static site server
+	server{
+		#set listening ports 433 for https
+		listen 443 ssl;
+	
+		server_name static.$DOMAIN_NAME;
+		#set root of nginx -> wordpress
+		root $WORDPRESS_PATH;
+		index index.php index.html index.htm;
+
+		#set ssl cert and key aswell as requiered protocol
+		ssl_certificate 	$SSL_CERT;
+		ssl_certificate_key	$SSL_KEY;
+		ssl_protocols	TLSv1.2 TLSv1.3;
+
+		#set where the static is located
+		location / {
+			proxy_pass http://static:3000;
+		        proxy_set_header Host $host;
+		        proxy_set_header X-Real-IP $remote_addr;
+		        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		}
+	}
+
+	#adminer server
+	server{
+		#set listening ports 433 for https
+		listen 443 ssl;
+	
+		server_name adminer.$DOMAIN_NAME;
+		#set root of nginx -> wordpress
+		root $WORDPRESS_PATH;
+		index index.php index.html index.htm;
+
+		#set ssl cert and key aswell as requiered protocol
+		ssl_certificate 	$SSL_CERT;
+		ssl_certificate_key	$SSL_KEY;
+		ssl_protocols	TLSv1.2 TLSv1.3;
+    		ssl_ciphers HIGH:!aNULL:!MD5;	
+
+		#set where nginx finds adminer
+		location / {
+			proxy_pass 		http://adminer:8080;
+			proxy_set_header	Host $host;
+			proxy_set_header        X-Real-IP $remote_addr;
+			proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+		}
+	}
+
+	#prometheus server
+	server{
+		#set listening ports 433 for https
+		listen 443 ssl;
+	
+		server_name prometheus.$DOMAIN_NAME;
+		#set root of nginx -> wordpress
+		root $WORDPRESS_PATH;
+		index index.php index.html index.htm;
+
+		#set ssl cert and key aswell as requiered protocol
+		ssl_certificate 	$SSL_CERT;
+		ssl_certificate_key	$SSL_KEY;
+		ssl_protocols	TLSv1.2 TLSv1.3;
+    		ssl_ciphers HIGH:!aNULL:!MD5;	
+		
+		#set where nginx finds prometheus
+		location / {
+			proxy_pass 		http://prometheus:9090;
+			proxy_set_header	Host $host;
+			proxy_set_header        X-Real-IP $remote_addr;
+			proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+		        proxy_set_header X-Forwarded-Proto $scheme;
+		}
 	}
 }
 

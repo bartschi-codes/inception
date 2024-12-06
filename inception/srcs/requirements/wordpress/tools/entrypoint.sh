@@ -8,7 +8,7 @@ envsubst "$(printf '${%s} ' $(env | sed 's/=.*//'))" \
 cd /var/www/html
 
 #wait for mariadb
-while ! mariadb -u"$WORDPRESS_USER"  -p"$WORDPRESS_PASSWORD" &> /dev/null;
+while ! mariadb -u"$WORDPRESS_ADMIN_USER"  -p"$WORDPRESS_ADMIN_PASSWORD" &> /dev/null;
 do
 	sleep 3
 done
@@ -28,12 +28,16 @@ then
 	--dbpass=$MYSQL_PASSWORD --dbhost=$MYSQL_HOST \
 	--path=/$WORDPRESS_PATH --skip-check --allow-root
 
-         wp core install \
+        wp core install \
 	--path=/$WORDPRESS_PATH --url=$DOMAIN_NAME \
-	--title=$WORDPRESS_TITLE --admin_user=$WORDPRESS_USER \
-	--admin_password=$WORDPRESS_PASSWORD \
-	--admin_email=$WORDPRESS_MAIL \
+	--title=$WORDPRESS_TITLE --admin_user=$WORDPRESS_ADMIN_USER \
+	--admin_password=$WORDPRESS_ADMIN_PASSWORD \
+	--admin_email=$WORDPRESS_ADMIN_MAIL \
 	--skip-email --allow-root
+
+	 # add non admin user
+	wp user create $WORDPRESS_USER_USER $WORDPRESS_USER_MAIL \
+	--user_pass=$WORDPRESS_USER_PASSWORD
 
 	 #install and configure redis
 	 wp config set WP_CACHE true --allow-root
@@ -45,6 +49,12 @@ then
 
 	#enable redis
 	wp redis enable --allow-root
+
+	#enable ftp
+	wp config set FS_METHOD ftpext --allow-root
+	wp config set FTP_HOST $FTP_HOST --allow-root
+	wp config set FTP_USER $FTP_USER --allow-root
+	wp config set FTP_PASS $FTP_PASS --allow-root
 fi
 
 # execute start command

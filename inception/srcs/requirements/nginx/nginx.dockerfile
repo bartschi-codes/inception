@@ -1,6 +1,5 @@
 #install alpine
-
-FROM alpine:edge
+FROM	alpine:3.21.0
 
 #Install NGINX and create folder with permissions for ssl
 RUN	<<EOF 
@@ -12,7 +11,6 @@ EOF
 
 # copy config and entrypointscript
 COPY conf/nginx.temp /etc/nginx/nginx.temp
-COPY index.html	/var/www/html/index.html
 COPY --chmod=744 tools/entrypoint.sh /usr/local/bin/nx_entrypoint.sh
 
 # expose port connecting

@@ -1,5 +1,5 @@
 # install alpine
-FROM alpine:edge
+FROM	alpine:3.21.0
 
 # install mariadb and create necassary folders
 RUN	<<EOF
@@ -19,6 +19,8 @@ COPY	--chmod=744 ./tools/md_entrypoint.sh ./conf/init.temp /usr/local/bin/
 # expose mariadb port
 EXPOSE	3306
 
+#set entrypoint script
 ENTRYPOINT	[ "/usr/local/bin/md_entrypoint.sh" ]
 
+#startup command for databse
 CMD	[ "mariadbd" ]
