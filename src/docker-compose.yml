@@ -126,7 +126,7 @@ volumes:
     driver: local 
     driver_opts: 
       type:   none
-      device: /home/mo/data/wordpress
+      device: /home/mbartsch/data/wordpress
       o:  bind
 
   mariadb:
@@ -134,16 +134,8 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/mo/data/mariadb
+      device: /home/mbartsch/data/mariadb
       o: bind
-
-  #docker_data:
-  #  name: docker_data
-  #  driver: local
-  #  driver_opts:
-  #    type:   none
-  #    device: /var/run/docker.sock
-  #    o: bind
 
 networks:
   inception:
