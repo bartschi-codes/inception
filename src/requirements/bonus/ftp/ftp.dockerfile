@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+
 #install alpine
 FROM	alpine:3.21.0
 

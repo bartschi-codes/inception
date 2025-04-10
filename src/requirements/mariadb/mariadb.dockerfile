@@ -1,14 +1,16 @@
+# syntax=docker/dockerfile:1
+
 # install alpine
 FROM	alpine:3.21.0
 
 # install mariadb and create necassary folders
-RUN	<<EOF
+RUN <<EOF
 apk update;
-apk add --no-cache \
-mariadb mariadb-server-utils mariadb-client gettext-envsubst coreutils;
+apk add --no-cache mariadb mariadb-server-utils \
+mariadb-client gettext-envsubst coreutils;
 mkdir -p /var/lib/mysql /run/mysqld;
 chown -R mysql:mysql /var/lib/mysql /run/mysqld;
-chmod 0744 /var/lib/mysql /run/mysqld;
+chmod 0755 /var/lib/mysql /run/mysqld;
 EOF
 
 # copy conf file and init.sql and entrypoint script

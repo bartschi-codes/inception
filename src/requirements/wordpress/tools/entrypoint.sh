@@ -1,4 +1,4 @@
-#!bin/sh
+#!/bin/sh
 
 # substitute env variable in conf file
 envsubst "$(printf '${%s} ' $(env | sed 's/=.*//'))" \
@@ -21,15 +21,15 @@ then
 
         mv wp-cli.phar /usr/local/bin/wp
 
-        wp core download --path=/$WORDPRESS_PATH --allow-root
+        php -d memory_limit=4G wp core download --path=$WORDPRESS_PATH --allow-root
 
         wp config create \
 	--dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER \
 	--dbpass=$MYSQL_PASSWORD --dbhost=$MYSQL_HOST \
-	--path=/$WORDPRESS_PATH --skip-check --allow-root
-
+	--path=$WORDPRESS_PATH --skip-check --allow-root
+	
         wp core install \
-	--path=/$WORDPRESS_PATH --url=$DOMAIN_NAME \
+	--path=$WORDPRESS_PATH --url=$DOMAIN_NAME \
 	--title=$WORDPRESS_TITLE --admin_user=$WORDPRESS_ADMIN_USER \
 	--admin_password=$WORDPRESS_ADMIN_PASSWORD \
 	--admin_email=$WORDPRESS_ADMIN_MAIL \
