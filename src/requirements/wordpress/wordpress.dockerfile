@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+
 # install alpine
 FROM	alpine:3.21.0
 
@@ -17,6 +19,9 @@ EOF
 
 # copy php config file and startup script
 COPY ./conf/php-fpm.temp /etc/php83/php-fpm.temp
+
+#Copy php init file for bigger memory limit
+COPY ./conf/php.ini /etc/php83/php.ini
 
 COPY --chmod=744 ./tools/entrypoint.sh	/usr/local/bin/wp_entrypoint.sh
 
