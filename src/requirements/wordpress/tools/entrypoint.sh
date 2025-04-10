@@ -21,7 +21,7 @@ then
 
         mv wp-cli.phar /usr/local/bin/wp
 
-        php -d memory_limit=4G wp core download --path=$WORDPRESS_PATH --allow-root
+        php -d memory_limit=4G /usr/local/bin/wp core download --path=$WORDPRESS_PATH --allow-root
 
         wp config create \
 	--dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER \

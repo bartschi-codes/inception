@@ -7,6 +7,8 @@ all: $(NAME)
 $(NAME):
 	docker-compose -f $(COMPOSE_FILE) up -d --build
 
+down: clean
+
 clean:
 	docker-compose -f $(COMPOSE_FILE) down
 

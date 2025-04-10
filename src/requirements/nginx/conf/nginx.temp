@@ -134,6 +134,9 @@ http {
 
 		#set where nginx finds prometheus
 		location /prometheus/ {
+
+			rewrite ^/prometheus(/.*)$ $1 break;
+
 			proxy_pass 		http://prometheus:9090;
 			proxy_set_header	Host $host;
 			proxy_set_header        X-Real-IP $remote_addr;
