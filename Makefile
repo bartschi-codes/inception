@@ -5,7 +5,7 @@ COMPOSE_FILE = src/docker-compose.yml
 all: $(NAME)
 
 $(NAME):
-	docker-compose -f $(COMPOSE_FILE) up --build
+	docker-compose -f $(COMPOSE_FILE) up -d --build
 
 clean:
 	docker-compose -f $(COMPOSE_FILE) down
