@@ -98,7 +98,15 @@ http {
 
 
 	# Includes virtual hosts configs.
-	include /etc/nginx/http.d/*.conf;
+	#include /etc/nginx/http.d/*.conf;
+
+	#block http 80
+	server {
+		listen 80;
+		server_name $DOMAIN_NAME;
+		
+		return 403;
+	}
 
 	#wordpress server
 	server{
