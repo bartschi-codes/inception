@@ -25,7 +25,7 @@ make
 ```
 access wordpress via localhost:443
 
-Example Logins are set in ```bash src/.env ```
+Example Logins are set in ``` src/.env ```
 
 ---
 
