@@ -23,7 +23,7 @@ git clone https://github.com/bartschi-codes/inception.git
 cd inception
 make
 ```
-access wordpress via localhost:443
+access wordpress via ``` localhost:443 ```
 
 Example Logins are set in ``` src/.env ```
 
