@@ -22,6 +22,7 @@ clone and make
 git clone https://github.com/bartschi-codes/inception.git
 cd inception
 make
+
 ```
 access wordpress via ``` localhost:443 ```
 
