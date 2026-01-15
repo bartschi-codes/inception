@@ -126,7 +126,7 @@ volumes:
     driver: local 
     driver_opts: 
       type:   none
-      device: /home/mbartsch/data/wordpress
+      device: ./data/wordpress
       o:  bind
 
   mariadb:
@@ -134,7 +134,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/mbartsch/data/mariadb
+      device: ./data/mariadb
       o: bind
 
 networks:

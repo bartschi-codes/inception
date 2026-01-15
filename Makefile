@@ -6,6 +6,8 @@ all: $(NAME)
 
 $(NAME):
 	docker-compose -f $(COMPOSE_FILE) up -d --build
+	makdir src/data/wordpress
+	mkdir src/data/mariadb
 
 down: clean
 
@@ -14,6 +16,7 @@ clean:
 
 fclean: clean
 	docker system prune -a --volumes
+	rm -rf src/data/*
 
 re: fclean all
 
