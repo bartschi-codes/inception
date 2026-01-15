@@ -5,9 +5,10 @@ COMPOSE_FILE = src/docker-compose.yml
 all: $(NAME)
 
 $(NAME):
+	mkdir -p src/data/wordpress
+	mkdir -p src/data/mariadb
 	docker-compose -f $(COMPOSE_FILE) up -d --build
-	makdir src/data/wordpress
-	mkdir src/data/mariadb
+
 
 down: clean
 
