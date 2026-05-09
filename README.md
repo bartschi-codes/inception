@@ -4,7 +4,7 @@
 
 ## 📝 Overview
 
-A small web-stack created form scratch using Docker and docker-compose. No prebuild images and based an alpine. 
+A small web-stack created form scratch using Docker and docker-compose. Only selfbuild images and based on alpine. 
 
 - **Proxy**         NGINX  
 - **Frontend**      Wordpress + php-fpm
